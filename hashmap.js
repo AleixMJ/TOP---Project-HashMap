@@ -28,5 +28,4 @@ class HashMap {
 
 
 }
-
-module.exports = HashMap
+export default HashMap;

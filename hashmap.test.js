@@ -1,4 +1,4 @@
-import HashMap from './main';
+import HashMap from './hashmap';
 
 // Assuming your HashMap class is exported from hashmap.js
 const HashMap = require('./hashmap'); 
