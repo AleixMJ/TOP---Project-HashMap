@@ -130,5 +130,47 @@ class HashMap {
         this.buckets = new Array(this.capacity).fill(null);
         this.size = 0;
     }
+
+    values() {
+        let result = [];
+  
+        for (let i = 0; i < this.buckets.length; i++) {
+            let currentNode = this.buckets[i];
+            while (currentNode !== null) {
+                result.push(currentNode.value);
+                currentNode = currentNode.nextNode;
+            }
+        }
+
+        return result;
+    }
+
+    keys() {
+        let result = [];
+  
+        for (let i = 0; i < this.buckets.length; i++) {
+            let currentNode = this.buckets[i];
+            while (currentNode !== null) {
+                result.push(currentNode.key);
+                currentNode = currentNode.nextNode;
+            }
+        }
+
+        return result;
+    }
+
+    entries() {
+        let result = [];
+  
+        for (let i = 0; i < this.buckets.length; i++) {
+            let currentNode = this.buckets[i];
+            while (currentNode !== null) {
+                result.push([currentNode.key, currentNode.value]);
+                currentNode = currentNode.nextNode;
+            }
+        }
+
+        return result;
+    }
 }
 export default HashMap;
