@@ -43,6 +43,7 @@ class HashMap {
 
         if (this.buckets[bucketIndex] === null) {
             this.buckets[bucketIndex] = newNode;
+            this.size++;
             return
         }
 
@@ -57,6 +58,7 @@ class HashMap {
 
             if (currentNode.nextNode === null) {
                 currentNode.nextNode = newNode;
+                this.size++;
                 return
             }
             currentNode = currentNode.nextNode;
