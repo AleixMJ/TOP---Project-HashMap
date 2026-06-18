@@ -84,7 +84,7 @@ class HashMap {
         let currentNode = this.buckets[bucketIndex]
 
         while (currentNode !== null) {
-            if (currentNode.key === key) {
+            if (currentNode.key === key) {                
                 return true;
             }
             currentNode = currentNode.nextNode;
@@ -102,6 +102,7 @@ class HashMap {
 
         if (currentNode.key === key) {
             this.buckets[bucketIndex] = currentNode.nextNode;
+            this.size--;
             return true;
         }
 
@@ -110,7 +111,8 @@ class HashMap {
 
         while (currentNode !== null) {
             if (currentNode.key === key) {
-                previousNode.nextNode = currentNode.nextNode
+                previousNode.nextNode = currentNode.nextNode;
+                this.size--;
                 return true;
             }
             previousNode = currentNode;
