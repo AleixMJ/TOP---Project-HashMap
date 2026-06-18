@@ -29,7 +29,11 @@ class HashMap {
     return hashCode;
     } 
 
-    set(key, value) {
+       set(key, value) {
+
+        if (!this.has(key) && this.size >= this.loadFactor * this.capacity) {
+            this.increaseBuckets();
+            }
 
         const bucketIndex = this.hash(key);
 
@@ -42,8 +46,9 @@ class HashMap {
         
 
         if (this.buckets[bucketIndex] === null) {
+
             this.buckets[bucketIndex] = newNode;
-            this.size++;
+            this.size++;            
             return
         }
 
@@ -63,6 +68,18 @@ class HashMap {
             }
             currentNode = currentNode.nextNode;
         }
+    }
+
+    increaseBuckets() {
+        const allPairs = [...this.entries()];
+
+        this.capacity = this.capacity * 2;
+        this.buckets = new Array(this.capacity).fill(null);
+        this.size = 0;               
+        
+        for (let pair of allPairs) {
+            this.set(pair[0], pair[1]);        
+            }
     }
 
     get(key) {

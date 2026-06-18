@@ -99,7 +99,7 @@ describe('HashMap', () => {
 
     // 10. Collision handler check
     test('should handle bucket collisions successfully using linked lists', () => {
-        // We force mock two keys to hit the exact same index manually if needed, 
+        // Force mock two keys to hit the exact same index manually if needed, 
         // but adding multiple keys generally triggers collisions naturally.
         hashMap.set('at', 'value1');
         hashMap.set('by', 'value2'); 
@@ -111,7 +111,27 @@ describe('HashMap', () => {
         if (index1 === index2) {
             const headNode = hashMap.buckets[index1];
             expect(headNode).not.toBeNull();
-            expect(headNode.next).not.toBeNull(); // A chain exists!
+            expect(headNode.nextNode).not.toBeNull(); // A chain exists!
+        }
+    });
+
+    // 11. Dynamic Resizing and Re-hashing Check
+    test('should automatically double capacity and re-hash existing keys when load factor threshold is crossed', () => {
+        expect(hashMap.capacity).toBe(16);
+
+        // Insert 13 unique items to cross the 12 item threshold (16 * 0.75 = 12)
+        for (let i = 1; i <= 13; i++) {
+            hashMap.set(`item-${i}`, `value-${i}`);
+        }
+
+        // Verify the array bucket size actually doubled
+        expect(hashMap.capacity).toBe(32);
+        expect(hashMap.buckets.length).toBe(32);
+        expect(hashMap.length()).toBe(13);
+
+        // Verify all elements are still fully accessible at their brand new hashed indices
+        for (let i = 1; i <= 13; i++) {
+            expect(hashMap.get(`item-${i}`)).toBe(`value-${i}`);
         }
     });
 });
