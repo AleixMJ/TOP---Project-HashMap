@@ -1,0 +1,27 @@
+{
+  "name": "top---project-hashmap",
+  "version": "1.0.0",
+  "description": "https://www.theodinproject.com/lessons/javascript-hashmap",
+  "main": "main.js",
+  "scripts": {
+    "test": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AleixMJ/TOP---Project-HashMap.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AleixMJ/TOP---Project-HashMap/issues"
+  },
+  "homepage": "https://github.com/AleixMJ/TOP---Project-HashMap#readme",
+  "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
+    "babel-jest": "^30.4.1",
+    "jest": "^30.4.2"
+  }
+}

@@ -21,4 +21,12 @@ class HashMap {
     return hashCode;
     } 
 
+    set(key, value) {
+
+        const hashCode = hash(key);
+    }
+
+
 }
+
+module.exports = HashMap
