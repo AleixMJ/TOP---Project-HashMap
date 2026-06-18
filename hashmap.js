@@ -1,4 +1,12 @@
 
+class HashNode {
+    constructor(key, value) {
+        this.key = key;
+        this.value = value;
+        this.nextNode = null;
+    }
+}
+
 class HashMap {
 
     constructor() {
@@ -23,7 +31,36 @@ class HashMap {
 
     set(key, value) {
 
-        const hashCode = hash(key);
+        const bucketIndex = this.hash(key);
+
+        // Odin Project Guard Clause
+        if (bucketIndex < 0 || bucketIndex >= this.buckets.length) {
+            throw new Error("Trying to access index out of bound");
+        }
+
+        const newNode = new HashNode(key, value)
+        
+
+        if (this.buckets[bucketIndex] === null) {
+            this.buckets[bucketIndex] = newNode;
+            return
+        }
+
+        let currentNode = this.buckets[bucketIndex]
+
+        while (currentNode !== null) {
+
+            if(currentNode.key === key) {
+                currentNode.value = value;
+                return
+            }
+
+            if (currentNode.nextNode === null) {
+                currentNode.nextNode = newNode;
+                return
+            }
+            currentNode = currentNode.nextNode;
+        }
     }
 
 
