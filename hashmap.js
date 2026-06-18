@@ -74,10 +74,49 @@ class HashMap {
             if (currentNode.key === key) {
                 return currentNode.value;
             }
-            currentNode = currentNode.next;
+            currentNode = currentNode.nextNode;
         }
         return null;
     }
 
+    has(key) {
+        const bucketIndex = this.hash(key);
+        let currentNode = this.buckets[bucketIndex]
+
+        while (currentNode !== null) {
+            if (currentNode.key === key) {
+                return true;
+            }
+            currentNode = currentNode.nextNode;
+        }
+        return false;
+    }
+
+    remove(key) {
+        const bucketIndex = this.hash(key);
+        let currentNode = this.buckets[bucketIndex]
+
+        if (currentNode === null) {
+            return false;
+        }
+
+        if (currentNode.key === key) {
+            this.buckets[bucketIndex] = currentNode.nextNode;
+            return true;
+        }
+
+        let previousNode = currentNode;
+        currentNode = currentNode.nextNode;
+
+        while (currentNode !== null) {
+            if (currentNode.key === key) {
+                previousNode.nextNode = currentNode.nextNode
+                return true;
+            }
+            previousNode = currentNode;
+            currentNode = currentNode.nextNode;
+        }
+        return false;       
+    }
 }
 export default HashMap;
